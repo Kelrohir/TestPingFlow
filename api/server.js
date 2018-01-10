@@ -5,7 +5,7 @@ var fs = require("fs");
 
 app.get('/postal', function (req, res) {
     res.set('Access-Control-Allow-Origin', '*'); 
-   fs.readFile( __dirname + "/Data/" + "Gps.json", 'utf8', function (err, data) {
+   fs.readFile( __dirname + "/Data/" + "PostalCode.json", 'utf8', function (err, data) {
        var communes = JSON.parse(data);
        res.end( JSON.stringify(communes) );
    });
@@ -14,11 +14,11 @@ app.get('/postal', function (req, res) {
  app.get('/:id', function (req, res) {
     res.set('Access-Control-Allow-Origin', '*');
     // First read existing users.
-    fs.readFile( __dirname + "/Data/" + "Gps.json", 'utf8', function (err, data) {
+    fs.readFile( __dirname + "/Data/" + "PostalCode.json", 'utf8', function (err, data) {
        var users = JSON.parse( data );
        var user = [];
        for(var i = 0; i < users.length; i++){
-           if (users[i]["Code_postal"] == req.params.id)
+           if (users[i]["Code Postal"] == req.params.id)
             user.push(users[i])
        }
        //var user = users["user" + req.params.id] 

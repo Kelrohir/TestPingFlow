@@ -13,11 +13,15 @@
           <th>Code postal</th>
           <th>Nom</th>
           <th>Code Insee</th>
+          <th>Altitude</th>
+          <th>Superficie</th>
         </tr>
         <tr v-for="commune of communes">
-          <td>{{commune.Code_postal}}</td>
-          <td>{{commune.Nom_commune}}</td>
-          <td>{{commune.Code_commune_INSEE}}</td>
+          <td>{{commune["Code Postal"]}}</td>
+          <td>{{commune.Commune}}</td>
+          <td>{{commune["Code INSEE"]}}</td>
+          <td>{{commune["Altitude Moyenne"]}}</td>
+          <td>{{commune.Superficie}}</td>
         </tr>
       </table>
     </div>
@@ -53,6 +57,7 @@ export default {
   created (){
     axios.get('http://localhost:8080/postal').then(response => {
       this.communes = response.data
+      console.log(this.communes);
     })
     .catch(e => {
       this.errors.push(e)
