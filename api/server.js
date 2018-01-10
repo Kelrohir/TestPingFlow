@@ -3,7 +3,8 @@ var app = express();
 var fs = require("fs");
 
 
-app.get('/listCommunes', function (req, res) {
+app.get('/postal', function (req, res) {
+    res.set('Access-Control-Allow-Origin', '*'); 
    fs.readFile( __dirname + "/Data/" + "Gps.json", 'utf8', function (err, data) {
        var communes = JSON.parse(data);
        res.end( JSON.stringify(communes) );
@@ -11,6 +12,7 @@ app.get('/listCommunes', function (req, res) {
 })
 
  app.get('/:id', function (req, res) {
+    res.set('Access-Control-Allow-Origin', '*');
     // First read existing users.
     fs.readFile( __dirname + "/Data/" + "Gps.json", 'utf8', function (err, data) {
        var users = JSON.parse( data );
@@ -25,19 +27,7 @@ app.get('/listCommunes', function (req, res) {
     });
  })
 
- app.delete('/deleteUser', function (req, res) {
-
-    // First read existing users.
-    fs.readFile( __dirname + "/Data/" + "Communes.json", 'utf8', function (err, data) {
-        data = JSON.parse( data );
-        delete data["user" + 2];
-        
-        console.log( data );
-        res.end( JSON.stringify(data));
-    });
- })
-
-var server = app.listen(8081, function () {
+var server = app.listen(8080, function () {
 
   var host = server.address().address
   var port = server.address().port
